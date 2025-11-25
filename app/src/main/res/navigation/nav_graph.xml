@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/roleSelectionFragment">
+
+    <fragment
+        android:id="@+id/roleSelectionFragment"
+        android:name="com.example.finapp.presentation.auth.RoleSelectionFragment"
+        android:label="Role Selection">
+        <action
+            android:id="@+id/action_roleSelection_to_phoneAuth"
+            app:destination="@id/phoneAuthFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/phoneAuthFragment"
+        android:name="com.example.finapp.presentation.auth.PhoneAuthFragment"
+        android:label="Phone Authentication">
+        <argument
+            android:name="role"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_phoneAuth_to_clientDashboard"
+            app:destination="@id/clientDashboardFragment"
+            app:popUpTo="@id/roleSelectionFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_phoneAuth_to_adminDashboard"
+            app:destination="@id/adminDashboardFragment"
+            app:popUpTo="@id/roleSelectionFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/clientDashboardFragment"
+        android:name="com.example.finapp.presentation.client.ClientDashboardFragment"
+        android:label="My Loans">
+        <action
+            android:id="@+id/action_clientDashboard_to_loanApplication"
+            app:destination="@id/loanApplicationFragment" />
+        <action
+            android:id="@+id/action_clientDashboard_to_payment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loanApplicationFragment"
+        android:name="com.example.finapp.presentation.client.LoanApplicationFragment"
+        android:label="Apply for Loan" />
+
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.finapp.presentation.client.PaymentFragment"
+        android:label="Make Payment">
+        <argument
+            android:name="loanId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/adminDashboardFragment"
+        android:name="com.example.finapp.presentation.admin.AdminDashboardFragment"
+        android:label="Admin Dashboard" />
+
+</navigation>
+

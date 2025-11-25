@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">FinApp</string>
+    
+    <!-- Role Selection -->
+    <string name="select_role">Select Your Role</string>
+    <string name="client">CLIENT</string>
+    <string name="admin">ADMIN</string>
+    
+    <!-- Authentication -->
+    <string name="phone_number">Phone Number</string>
+    <string name="enter_phone">Enter your phone number</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="resend_otp">Resend OTP</string>
+    
+    <!-- Profile -->
+    <string name="name">Name</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="submit">Submit</string>
+    
+    <!-- Loan Application -->
+    <string name="loan_application">Loan Application</string>
+    <string name="loan_type">Loan Type</string>
+    <string name="select_loan_type">Select loan type</string>
+    <string name="interest_rate">Interest Rate</string>
+    <string name="loan_amount">Loan Amount (₹)</string>
+    <string name="enter_amount">Enter amount</string>
+    <string name="duration_months">Duration (Months)</string>
+    <string name="enter_duration">Enter duration in months</string>
+    <string name="calculate">Calculate</string>
+    <string name="total_amount">Total Amount: ₹%s</string>
+    <string name="daily_amount">Daily Payment: ₹%s</string>
+    <string name="submit_loan_request">Submit Loan Request</string>
+    
+    <!-- Loan Status -->
+    <string name="my_loans">My Loans</string>
+    <string name="pending">Pending</string>
+    <string name="approved">Approved</string>
+    <string name="rejected">Rejected</string>
+    <string name="completed">Completed</string>
+    
+    <!-- Payment -->
+    <string name="make_payment">Make Payment</string>
+    <string name="payment_history">Payment History</string>
+    <string name="pay_now">Pay Now</string>
+    <string name="pay_with_upi">Pay with UPI</string>
+    <string name="amount_due">Amount Due Today: ₹%s</string>
+    <string name="total_paid">Total Paid: ₹%s</string>
+    <string name="remaining_amount">Remaining: ₹%s</string>
+    <string name="enter_upi_id">Enter UPI ID</string>
+    <string name="enter_transaction_id">Enter Transaction ID</string>
+    <string name="confirm_payment">Confirm Payment</string>
+    <string name="confirm_manual_payment">Confirm Manual Payment</string>
+    
+    <!-- Admin -->
+    <string name="admin_dashboard">Admin Dashboard</string>
+    <string name="pending_loans">Pending Loan Requests</string>
+    <string name="active_loans">Active Loans</string>
+    <string name="todays_payments">Today\'s Payments</string>
+    <string name="approve">Approve</string>
+    <string name="reject">Reject</string>
+    <string name="total_collected">Total Collected: ₹%s</string>
+    <string name="customers_paid">Customers Paid: %d</string>
+    
+    <!-- Common -->
+    <string name="loading">Loading…</string>
+    <string name="error">Error</string>
+    <string name="success">Success</string>
+    <string name="logout">Logout</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+</resources>
