@@ -8,13 +8,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.finapp.data.model.User
 import com.example.finapp.data.model.UserRole
 import com.example.finapp.data.repository.AuthRepository
+import com.example.finapp.utils.FCMHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val fcmHelper: FCMHelper
 ) : ViewModel() {
     
     private val _authState = MutableLiveData<AuthState>()
@@ -60,6 +62,10 @@ class AuthViewModel @Inject constructor(
             result.fold(
                 onSuccess = { user ->
                     _user.value = user
+                    
+                    // Initialize FCM token for this user
+                    fcmHelper.initializeFCM(user.id)
+                    
                     _authState.value = AuthState.Authenticated(user)
                 },
                 onFailure = { error ->

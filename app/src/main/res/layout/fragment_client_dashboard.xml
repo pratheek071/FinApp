@@ -17,16 +17,44 @@
             android:padding="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <TextView
-            android:id="@+id/tvEmptyState"
-            android:layout_width="wrap_content"
+        <!-- Empty State with Instructions -->
+        <LinearLayout
+            android:id="@+id/layoutEmptyState"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="No loans yet. Apply for a loan to get started!"
-            android:textColor="@color/gray"
-            android:visibility="gone"
-            android:padding="24dp"
-            android:gravity="center" />
+            android:orientation="vertical"
+            android:padding="32dp"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@android:drawable/ic_input_add"
+                android:tint="@color/primary"
+                android:alpha="0.5"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Loans Yet"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click the ➕ button below to\nfill out a loan request form"
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:gravity="center"
+                android:lineSpacingExtra="4dp" />
+
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/progressBar"

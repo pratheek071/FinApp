@@ -26,11 +26,11 @@ class LoanViewModel @Inject constructor(
     private val _loanCalculation = MutableLiveData<LoanCalculation>()
     val loanCalculation: LiveData<LoanCalculation> = _loanCalculation
     
-    fun calculateLoan(principalAmount: Double, interestRate: Double, durationMonths: Int) {
+    fun calculateLoan(principalAmount: Double, interestRate: Double, durationYears: Int) {
         val calculation = LoanCalculator.calculateLoanDetails(
             principalAmount,
             interestRate,
-            durationMonths
+            durationYears
         )
         _loanCalculation.value = calculation
     }

@@ -30,13 +30,14 @@
             android:textColor="@color/gray"
             android:layout_marginBottom="32dp" />
 
-        <!-- Phone Number Input -->
+        <!-- Phone Number + Name Input -->
         <LinearLayout
             android:id="@+id/layoutPhoneInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Phone with default +91 -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,7 +49,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
-                    android:maxLength="13" />
+                    android:maxLength="13"
+                    android:text="+91" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Name on same screen -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -100,45 +117,6 @@
                 android:textColor="@color/primary"
                 android:layout_gravity="center"
                 android:padding="16dp" />
-        </LinearLayout>
-
-        <!-- Name Input (for new users) -->
-        <LinearLayout
-            android:id="@+id/layoutNameInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Complete Your Profile"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/name"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSubmitProfile"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="@string/submit"
-                android:textSize="16sp"
-                app:cornerRadius="8dp"
-                android:layout_marginTop="16dp" />
         </LinearLayout>
 
         <!-- Loading Progress -->

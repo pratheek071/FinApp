@@ -32,6 +32,13 @@ class LoanApplicationFragment : Fragment() {
     
     private var selectedLoanType: LoanType = LoanType.EDUCATION
     
+    companion object {
+        private const val MIN_LOAN_AMOUNT = 10000.0
+        private const val MAX_LOAN_AMOUNT = 20000000.0
+        private const val MIN_DURATION_YEARS = 2
+        private const val MAX_DURATION_YEARS = 25
+    }
+    
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -95,19 +102,65 @@ class LoanApplicationFragment : Fragment() {
         }
         
         val amount = amountStr.toDoubleOrNull()
-        val duration = durationStr.toIntOrNull()
+        val durationYears = durationStr.toIntOrNull()
         
+        // Validate amount
         if (amount == null || amount <= 0) {
             Toast.makeText(context, "Please enter valid amount", Toast.LENGTH_SHORT).show()
             return
         }
         
-        if (duration == null || duration <= 0) {
-            Toast.makeText(context, "Please enter valid duration", Toast.LENGTH_SHORT).show()
+        if (amount < MIN_LOAN_AMOUNT) {
+            Toast.makeText(
+                context, 
+                "Loan amount must be at least ₹${MIN_LOAN_AMOUNT.toInt()}", 
+                Toast.LENGTH_LONG
+            ).show()
+            binding.etLoanAmount.error = "Minimum ₹${MIN_LOAN_AMOUNT.toInt()}"
             return
         }
         
-        viewModel.calculateLoan(amount, selectedLoanType.interestRate, duration)
+        if (amount > MAX_LOAN_AMOUNT) {
+            Toast.makeText(
+                context, 
+                "Loan amount cannot exceed ₹${MAX_LOAN_AMOUNT.toInt()}", 
+                Toast.LENGTH_LONG
+            ).show()
+            binding.etLoanAmount.error = "Maximum ₹${MAX_LOAN_AMOUNT.toInt()}"
+            return
+        }
+        
+        // Validate duration
+        if (durationYears == null || durationYears <= 0) {
+            Toast.makeText(context, "Please enter valid duration in years", Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        if (durationYears < MIN_DURATION_YEARS) {
+            Toast.makeText(
+                context, 
+                "Loan duration must be at least $MIN_DURATION_YEARS years", 
+                Toast.LENGTH_LONG
+            ).show()
+            binding.etDuration.error = "Minimum $MIN_DURATION_YEARS years"
+            return
+        }
+        
+        if (durationYears > MAX_DURATION_YEARS) {
+            Toast.makeText(
+                context, 
+                "Loan duration cannot exceed $MAX_DURATION_YEARS years", 
+                Toast.LENGTH_LONG
+            ).show()
+            binding.etDuration.error = "Maximum $MAX_DURATION_YEARS years"
+            return
+        }
+        
+        // Clear any previous errors
+        binding.etLoanAmount.error = null
+        binding.etDuration.error = null
+        
+        viewModel.calculateLoan(amount, selectedLoanType.interestRate, durationYears)
     }
     
     private fun submitLoan() {
@@ -143,7 +196,7 @@ class LoanApplicationFragment : Fragment() {
             binding.tvPrincipalAmount.text = "₹${calculation.principalAmount}"
             binding.tvInterestAmount.text = "₹${calculation.totalInterest}"
             binding.tvTotalAmount.text = "₹${calculation.totalAmount}"
-            binding.tvDailyAmount.text = "₹${calculation.dailyAmount}"
+            binding.tvDailyAmount.text = "₹${calculation.monthlyAmount}"
         }
         
         viewModel.loanState.observe(viewLifecycleOwner) { state ->

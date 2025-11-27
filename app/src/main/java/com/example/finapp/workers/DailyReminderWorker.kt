@@ -32,7 +32,7 @@ class DailyReminderWorker(
             val activeLoans = loanRepository.getApprovedLoans().getOrNull() ?: emptyList()
             
             activeLoans.forEach { loan ->
-                // Check if payment is made today for this loan
+                // Check if payment is made this month for this loan
                 val todayPayment = paymentRepository.getTodayPaymentForLoan(loan.id).getOrNull()
                 
                 if (todayPayment == null) {
@@ -40,7 +40,7 @@ class DailyReminderWorker(
                     sendReminderNotification(
                         userId = loan.userId,
                         userName = loan.userName,
-                        amount = loan.dailyAmount
+                        amount = loan.monthlyAmount
                     )
                 }
             }
@@ -65,8 +65,8 @@ class DailyReminderWorker(
         )
         
         val notification = NotificationCompat.Builder(applicationContext, Constants.NOTIFICATION_CHANNEL_ID)
-            .setContentTitle("Payment Reminder")
-            .setContentText("Hi $userName, your daily payment of ₹$amount is due today!")
+            .setContentTitle("Monthly Payment Reminder")
+            .setContentText("Hi $userName, your monthly payment of ₹$amount is due this month!")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)

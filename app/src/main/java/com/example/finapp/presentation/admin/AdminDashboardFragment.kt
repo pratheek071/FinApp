@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.finapp.R
 import com.example.finapp.databinding.FragmentAdminDashboardBinding
@@ -165,7 +166,13 @@ class AdminDashboardFragment : Fragment() {
     private fun logout() {
         firebaseAuth.signOut()
         preferenceManager.clear()
-        findNavController().navigate(R.id.roleSelectionFragment)
+
+        // Clear admin dashboard from back stack so back doesn't return here
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.adminDashboardFragment, true)
+            .build()
+
+        findNavController().navigate(R.id.roleSelectionFragment, null, navOptions)
     }
     
     override fun onDestroyView() {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FinApp</string>
+    <string name="app_name">LendFlow</string>
     
     <!-- Role Selection -->
     <string name="select_role">Select Your Role</string>
@@ -23,14 +23,15 @@
     <string name="loan_application">Loan Application</string>
     <string name="loan_type">Loan Type</string>
     <string name="select_loan_type">Select loan type</string>
-    <string name="interest_rate">Interest Rate</string>
+    <string name="interest_rate">Interest Rate (Annual)</string>
     <string name="loan_amount">Loan Amount (₹)</string>
     <string name="enter_amount">Enter amount</string>
-    <string name="duration_months">Duration (Months)</string>
-    <string name="enter_duration">Enter duration in months</string>
+    <string name="duration_months">Duration (Years)</string>
+    <string name="enter_duration">Enter duration in years</string>
     <string name="calculate">Calculate</string>
     <string name="total_amount">Total Amount: ₹%s</string>
-    <string name="daily_amount">Daily Payment: ₹%s</string>
+    <string name="daily_amount">Monthly Payment: ₹%s</string>
+    <string name="monthly_amount">Monthly Payment: ₹%s</string>
     <string name="submit_loan_request">Submit Loan Request</string>
     
     <!-- Loan Status -->
@@ -45,7 +46,7 @@
     <string name="payment_history">Payment History</string>
     <string name="pay_now">Pay Now</string>
     <string name="pay_with_upi">Pay with UPI</string>
-    <string name="amount_due">Amount Due Today: ₹%s</string>
+    <string name="amount_due">Amount Due This Month: ₹%s</string>
     <string name="total_paid">Total Paid: ₹%s</string>
     <string name="remaining_amount">Remaining: ₹%s</string>
     <string name="enter_upi_id">Enter UPI ID</string>

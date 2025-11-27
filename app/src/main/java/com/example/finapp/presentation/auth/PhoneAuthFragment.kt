@@ -40,6 +40,10 @@ class PhoneAuthFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         
         binding.tvSubtitle.text = "Sign in as ${args.role}"
+
+        // Pre-fill default country code for India
+        binding.etPhoneNumber.setText("+91")
+        binding.etPhoneNumber.setSelection(binding.etPhoneNumber.text?.length ?: 3)
         
         setupClickListeners()
         observeAuthState()
@@ -48,10 +52,18 @@ class PhoneAuthFragment : Fragment() {
     private fun setupClickListeners() {
         binding.btnSendOtp.setOnClickListener {
             phoneNumber = binding.etPhoneNumber.text.toString()
-            if (phoneNumber.isNotEmpty()) {
-                viewModel.sendOTP(phoneNumber, requireActivity())
-            } else {
-                Toast.makeText(context, "Please enter phone number", Toast.LENGTH_SHORT).show()
+            val name = binding.etName.text.toString()
+            
+            when {
+                phoneNumber.isEmpty() -> {
+                    Toast.makeText(context, "Please enter phone number", Toast.LENGTH_SHORT).show()
+                }
+                name.isEmpty() -> {
+                    Toast.makeText(context, "Please enter your name", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    viewModel.sendOTP(phoneNumber, requireActivity())
+                }
             }
         }
         
@@ -66,16 +78,6 @@ class PhoneAuthFragment : Fragment() {
         
         binding.tvResendOtp.setOnClickListener {
             viewModel.sendOTP(phoneNumber, requireActivity())
-        }
-        
-        binding.btnSubmitProfile.setOnClickListener {
-            val name = binding.etName.text.toString()
-            if (name.isNotEmpty()) {
-                val role = UserRole.valueOf(args.role)
-                viewModel.createOrGetUser(phoneNumber, name, role)
-            } else {
-                Toast.makeText(context, "Please enter your name", Toast.LENGTH_SHORT).show()
-            }
         }
     }
     
@@ -93,7 +95,14 @@ class PhoneAuthFragment : Fragment() {
                 
                 is AuthState.OTPVerified -> {
                     showLoading(false)
-                    showNameInput()
+                    // OTP is valid; now create or fetch user and go to dashboard
+                    val name = binding.etName.text.toString()
+                    if (name.isEmpty()) {
+                        Toast.makeText(context, "Please enter your name", Toast.LENGTH_SHORT).show()
+                    } else {
+                        val role = UserRole.valueOf(args.role)
+                        viewModel.createOrGetUser(phoneNumber, name, role)
+                    }
                 }
                 
                 is AuthState.Authenticated -> {
@@ -113,19 +122,12 @@ class PhoneAuthFragment : Fragment() {
         binding.progressBar.isVisible = show
         binding.btnSendOtp.isEnabled = !show
         binding.btnVerifyOtp.isEnabled = !show
-        binding.btnSubmitProfile.isEnabled = !show
     }
     
     private fun showOTPInput() {
+        // Move to OTP-only page: hide phone+name, show OTP
         binding.layoutPhoneInput.isVisible = false
         binding.layoutOtpInput.isVisible = true
-        binding.layoutNameInput.isVisible = false
-    }
-    
-    private fun showNameInput() {
-        binding.layoutPhoneInput.isVisible = false
-        binding.layoutOtpInput.isVisible = false
-        binding.layoutNameInput.isVisible = true
     }
     
     private fun navigateToDashboard(role: UserRole) {

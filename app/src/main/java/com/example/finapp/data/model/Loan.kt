@@ -8,10 +8,10 @@ data class Loan(
     val loanType: LoanType = LoanType.EDUCATION,
     val interestRate: Double = 0.0,
     val principalAmount: Double = 0.0,
-    val durationMonths: Int = 0,
+    val durationMonths: Int = 0, // Now stores total months (years * 12)
     val totalAmount: Double = 0.0,
-    val dailyAmount: Double = 0.0,
-    val totalDays: Int = 0,
+    val dailyAmount: Double = 0.0, // Now stores monthly amount
+    val totalDays: Int = 0, // Now stores total months
     val status: LoanStatus = LoanStatus.PENDING,
     val requestedAt: Long = System.currentTimeMillis(),
     val approvedAt: Long? = null,
@@ -19,13 +19,18 @@ data class Loan(
     val endDate: Long? = null,
     val paidAmount: Double = 0.0,
     val remainingAmount: Double = 0.0
-)
+) {
+    // Helper properties for clarity
+    val monthlyAmount: Double get() = dailyAmount
+    val totalMonths: Int get() = totalDays
+    val durationYears: Int get() = durationMonths / 12
+}
 
 enum class LoanType(val displayName: String, val interestRate: Double) {
-    EDUCATION("Education Loan", 5.0),
-    PERSONAL("Personal Loan", 5.5),
-    HOME("Home Loan", 6.0),
-    CAR("Car Loan", 6.5);
+    EDUCATION("Education Loan", 6.88),
+    PERSONAL("Personal Loan", 12.0),
+    HOME("Home Loan", 7.0),
+    CAR("Car Loan", 7.99);
     
     companion object {
         fun fromDisplayName(displayName: String): LoanType? {

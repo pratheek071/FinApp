@@ -7,24 +7,27 @@ object LoanCalculator {
     fun calculateLoanDetails(
         principalAmount: Double,
         interestRate: Double,
-        durationMonths: Int
+        durationYears: Int
     ): LoanCalculation {
-        // Calculate total interest based on simple interest
-        val totalInterest = (principalAmount * interestRate * durationMonths) / (100 * 12)
+        // Calculate total months
+        val totalMonths = durationYears * 12
+        
+        // Calculate total interest based on simple interest (annual rate * years)
+        val totalInterest = (principalAmount * interestRate * durationYears) / 100
         val totalAmount = principalAmount + totalInterest
         
-        // Calculate duration in days (approximation: 30 days per month)
-        val durationDays = durationMonths * 30
-        val dailyAmount = totalAmount / durationDays
+        // Calculate monthly payment amount
+        val monthlyAmount = totalAmount / totalMonths
         
         return LoanCalculation(
             principalAmount = principalAmount,
             interestRate = interestRate,
-            durationMonths = durationMonths,
+            durationYears = durationYears,
+            durationMonths = totalMonths,
             totalInterest = totalInterest.roundTo2Decimals(),
             totalAmount = totalAmount.roundTo2Decimals(),
-            dailyAmount = dailyAmount.roundTo2Decimals(),
-            durationDays = durationDays
+            monthlyAmount = monthlyAmount.roundTo2Decimals(),
+            totalMonths = totalMonths
         )
     }
     
@@ -36,10 +39,15 @@ object LoanCalculator {
 data class LoanCalculation(
     val principalAmount: Double,
     val interestRate: Double,
-    val durationMonths: Int,
+    val durationYears: Int,
+    val durationMonths: Int, // Total months for storage
     val totalInterest: Double,
     val totalAmount: Double,
-    val dailyAmount: Double,
-    val durationDays: Int
-)
+    val monthlyAmount: Double,
+    val totalMonths: Int
+) {
+    // Legacy properties for backward compatibility
+    val dailyAmount: Double get() = monthlyAmount
+    val durationDays: Int get() = totalMonths
+}
 

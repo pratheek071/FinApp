@@ -93,6 +93,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/loan_amount"
+            app:helperText="Range: ₹10,000 - ₹2,00,00,000"
+            app:helperTextEnabled="true"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_marginBottom="16dp">
 
@@ -103,11 +105,13 @@
                 android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Duration in Months -->
+        <!-- Duration in Years -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/duration_months"
+            app:helperText="Range: 2 - 25 years"
+            app:helperTextEnabled="true"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_marginBottom="16dp">
 
@@ -230,7 +234,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Daily Payment:"
+                        android:text="Monthly Payment:"
                         android:textColor="@color/accent"
                         android:textStyle="bold" />
 

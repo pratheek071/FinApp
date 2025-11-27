@@ -54,7 +54,7 @@
             android:id="@+id/tvDailyPayment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Daily Payment: ₹3,500"
+            android:text="Monthly Payment: ₹3,500"
             android:textSize="14sp"
             android:textColor="@color/accent"
             android:layout_marginBottom="4dp" />

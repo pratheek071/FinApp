@@ -43,8 +43,8 @@ class AdminLoansAdapter(
                 tvPhoneNumber.text = loan.phoneNumber
                 tvLoanType.text = loan.loanType.displayName
                 tvAmount.text = "₹${loan.totalAmount}"
-                tvDuration.text = "${loan.durationMonths} months"
-                tvDailyPayment.text = "₹${loan.dailyAmount}"
+                tvDuration.text = "${loan.durationYears} years (${loan.totalMonths} months)"
+                tvDailyPayment.text = "₹${loan.monthlyAmount}"
                 tvRequestDate.text = DateUtils.formatDate(loan.requestedAt)
                 
                 // Show actions for pending loans

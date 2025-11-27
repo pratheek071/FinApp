@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.finapp.R
 import com.example.finapp.databinding.FragmentClientDashboardBinding
@@ -91,7 +92,7 @@ class ClientDashboardFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.userLoans.observe(viewLifecycleOwner) { loans ->
             loansAdapter.submitList(loans)
-            binding.tvEmptyState.isVisible = loans.isEmpty()
+            binding.layoutEmptyState.isVisible = loans.isEmpty()
             binding.rvLoans.isVisible = loans.isNotEmpty()
         }
         
@@ -120,7 +121,13 @@ class ClientDashboardFragment : Fragment() {
     private fun logout() {
         firebaseAuth.signOut()
         preferenceManager.clear()
-        findNavController().navigate(R.id.roleSelectionFragment)
+
+        // Clear client dashboard from back stack so back doesn't return here
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.clientDashboardFragment, true)
+            .build()
+
+        findNavController().navigate(R.id.roleSelectionFragment, null, navOptions)
     }
     
     override fun onDestroyView() {

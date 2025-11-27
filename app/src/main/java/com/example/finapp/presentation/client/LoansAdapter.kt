@@ -39,7 +39,7 @@ class LoansAdapter(
             binding.apply {
                 tvLoanType.text = loan.loanType.displayName
                 tvAmount.text = "Total Amount: ₹${loan.totalAmount}"
-                tvDailyPayment.text = "Daily Payment: ₹${loan.dailyAmount}"
+                tvDailyPayment.text = "Monthly Payment: ₹${loan.monthlyAmount}"
                 tvDate.text = "Requested: ${DateUtils.formatDate(loan.requestedAt)}"
                 
                 // Set status
